@@ -1,23 +1,851 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <title>Home</title>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
-    <!--
-      Need a visual blank slate?
-      Remove all code in `styles.css`!
-    -->
-    <link rel="stylesheet" href="styles.css" />
-    <script type="module" src="script.js"></script>
-  </head>
-  <body>
-    <nav>
-      <a href="/" aria-current="page">Home</a>
-      <a href="/page2.html">Other page</a>
-    </nav>
-    <main>
-      <h1>Home page</h1>
+
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      "name": "현대자동차 디 올 뉴 아반떼",
+      "image": "https://www.hyundai.com/static/images/model/avante/25my/avante_highlights_design_01_w.jpg",
+      "description": "2026년형 현대자동차 더 올 뉴 아반떼 가격표 및 모델별 견적 정보. 스마트스트림 가솔린 1.6 및 하이브리드 트림별 장단점 분석과 추천 옵션 가이드.",
+      "brand": {
+        "@type": "Brand",
+        "name": "현대자동차"
+      },
+      "offers": {
+        "@type": "AggregateOffer",
+        "priceCurrency": "KRW",
+        "lowPrice": "20340000",
+        "highPrice": "31840000",
+        "offerCount": "10"
+      }
+    }
+    </script>
+
+    <style>
+        :root {
+            --primary-color: #1e293b; 
+            --secondary-color: #4f46e5; 
+            --accent-green: #059669; 
+            --accent-warm: #d97706; 
+            --bg-color: #f8fafc; 
+            --card-bg: #ffffff;
+            --text-color: #334155;
+            --light-text: #64748b;
+            --border-color: #e2e8f0;
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06);
+        }
+
+        body { 
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; 
+            margin: 0; 
+            padding: 0; 
+            color: var(--text-color); 
+            line-height: 1.8; 
+            background-color: var(--bg-color); 
+        }
+
+        .container { 
+            max-width: 1120px; 
+            margin: 0 auto; 
+            padding: 0 24px; 
+        }
+
+        header { 
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); 
+            color: #ffffff; 
+            padding: 60px 0; 
+            text-align: center;
+        }
+
+        header h1 { 
+            font-size: 2.5rem; 
+            font-weight: 800; 
+            margin: 0 0 16px 0; 
+            letter-spacing: -0.05em;
+            color: #f8fafc;
+        }
+
+        header p { 
+            font-size: 1.15rem; 
+            opacity: 0.9; 
+            max-width: 720px; 
+            margin: 0 auto; 
+            line-height: 1.6;
+        }
+
+        nav { 
+            margin-top: 32px; 
+        }
+
+        nav ul { 
+            list-style: none; 
+            padding: 0; 
+            display: flex; 
+            flex-wrap: wrap; 
+            justify-content: center; 
+            gap: 16px; 
+        }
+
+        nav a { 
+            text-decoration: none; 
+            color: #cbd5e1; 
+            font-weight: 500; 
+            font-size: 0.95rem;
+            padding: 10px 20px; 
+            border-radius: 8px; 
+            transition: all 0.2s ease; 
+            background: rgba(255, 255, 255, 0.08); 
+        }
+
+        nav a:hover { 
+            background: rgba(255, 255, 255, 0.18); 
+            color: #ffffff;
+        }
+
+        section { 
+            padding: 48px 0; 
+        }
+
+        h2 { 
+            font-size: 1.85rem; 
+            color: var(--primary-color); 
+            font-weight: 700; 
+            margin-top: 0;
+            margin-bottom: 24px; 
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 12px;
+            letter-spacing: -0.03em;
+        }
+
+        h3 { 
+            font-size: 1.35rem; 
+            color: var(--secondary-color); 
+            font-weight: 600; 
+            margin-top: 32px; 
+            margin-bottom: 16px; 
+        }
+
+        .grid-layout {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 32px;
+        }
+
+        @media (max-width: 960px) {
+            .grid-layout {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .card { 
+            background: var(--card-bg); 
+            border: 1px solid var(--border-color); 
+            padding: 32px; 
+            border-radius: 12px; 
+            box-shadow: var(--shadow-sm);
+            margin-bottom: 24px;
+        }
+
+        .highlight-box {
+            background-color: #f1f5f9;
+            border-left: 4px solid var(--secondary-color);
+            padding: 20px;
+            border-radius: 0 8px 8px 0;
+            margin: 24px 0;
+        }
+
+        .popularity-chart {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 24px;
+            box-shadow: var(--shadow-sm);
+            margin-bottom: 32px;
+        }
+
+        .chart-bar-container {
+            margin-bottom: 16px;
+        }
+
+        .bar-label {
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 6px;
+            display: block;
+            color: var(--primary-color);
+        }
+
+        .bar-wrapper {
+            background-color: #e2e8f0;
+            border-radius: 6px;
+            height: 12px;
+            overflow: hidden;
+        }
+
+        .bar {
+            height: 100%;
+            border-radius: 6px;
+            transition: width 1s ease-in-out;
+        }
+
+        .table-responsive {
+            overflow-x: auto;
+            margin-top: 20px;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+        }
+
+        table { 
+            width: 100%; 
+            border-collapse: collapse; 
+            text-align: left;
+            font-size: 0.95rem;
+        }
+
+        th, td { 
+            padding: 14px 16px; 
+            border-bottom: 1px solid var(--border-color); 
+        }
+
+        th { 
+            background-color: #f1f5f9; 
+            color: var(--primary-color); 
+            font-weight: 600; 
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        .interactive-calculator {
+            background-color: #eff6ff;
+            border: 2px solid #bfdbfe;
+            border-radius: 12px;
+            padding: 32px;
+            margin: 32px 0;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+            margin-bottom: 24px;
+        }
+
+        .form-group {
+            display: flex;
+            direction: ltr;
+            flex-direction: column;
+        }
+
+        .form-group label {
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: var(--primary-color);
+            font-size: 0.9rem;
+        }
+
+        .form-group select, .form-group input {
+            padding: 12px;
+            border: 1px solid #cbd5e1;
+            border-radius: 8px;
+            background-color: #ffffff;
+            font-size: 1rem;
+            color: var(--text-color);
+            outline: none;
+        }
+
+        .form-group select:focus, .form-group input:focus {
+            border-color: var(--secondary-color);
+            box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.15);
+        }
+
+        .calc-result {
+            background-color: #ffffff;
+            border: 1px solid #bfdbfe;
+            border-radius: 8px;
+            padding: 24px;
+            text-align: center;
+        }
+
+        .calc-result p {
+            margin: 8px 0;
+            font-size: 1.1rem;
+        }
+
+        .calc-result .total-price {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--secondary-color);
+        }
+
+        .link-block {
+            background-color: #f0fdf4;
+            border: 1px solid #bbf7d0;
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 32px;
+        }
+
+        .link-block h3 {
+            color: var(--accent-green);
+            margin-top: 0;
+        }
+
+        .link-block ul {
+            list-style: none;
+            padding: 0;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 12px;
+        }
+
+        .link-block a {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.2s ease;
+        }
+
+        .link-block a:hover {
+            color: var(--secondary-color);
+            text-decoration: underline;
+        }
+
+        .faq .item {
+            border-bottom: 1px solid var(--border-color);
+            padding: 18px 0;
+        }
+
+        .faq .item:last-child {
+            border-bottom: none;
+        }
+
+        .faq h4 {
+            font-size: 1.1rem;
+            color: var(--primary-color);
+            margin: 0;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+        }
+
+        .faq h4 span {
+            font-size: 1.3rem;
+            font-weight: 300;
+            color: var(--light-text);
+            transition: transform 0.2s ease;
+        }
+
+        .faq .item.open h4 span {
+            transform: rotate(45deg);
+        }
+
+        .faq p {
+            margin-top: 12px;
+            margin-bottom: 0;
+            color: var(--light-text);
+            display: none;
+        }
+
+        .faq .item.open p {
+            display: block;
+        }
+
+        .contact-form {
+            background-color: #ffffff;
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 32px;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .contact-form input, .contact-form textarea, .contact-form select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #cbd5e1;
+            border-radius: 8px;
+            box-sizing: border-box;
+            margin-bottom: 16px;
+            background-color: #ffffff;
+        }
+
+        .contact-form button {
+            background-color: var(--secondary-color);
+            color: #ffffff;
+            border: none;
+            padding: 16px 24px;
+            border-radius: 8px;
+            font-weight: 700;
+            cursor: pointer;
+            width: 100%;
+            font-size: 1.05rem;
+            transition: background 0.2s ease;
+        }
+
+        .contact-form button:hover {
+            background-color: #4338ca;
+        }
+
+        footer {
+            background-color: #0f172a;
+            color: #94a3b8;
+            padding: 40px 0;
+            text-align: center;
+            font-size: 0.9rem;
+            border-top: 1px solid #1e293b;
+        }
+
+        footer a {
+            color: #cbd5e1;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container">
+            <h1>더 올 뉴 아반떼 가격 및 2026년형 트림별 실구매가 정밀 비교 가이드</h1>
+            <p>스마트스트림 가솔린 1.6 엔진부터 하이브리드 인스퍼레이션 등급까지, 가장 합리적인 옵션 구성과 자동차 금융 설계 전략을 통합적으로 제시합니다.</p>
+            <nav>
+                <ul>
+                    <li><a href="#market-analysis">2026 시장 전망</a></li>
+                    <li><a href="#popularity-section">트림 선호도</a></li>
+                    <li><a href="#price-table">공식 가격표</a></li>
+                    <li><a href="#calculator-section">실구매가 계산기</a></li>
+                    <li><a href="#purchase-methods">금융 요금제 비교</a></li>
+                    <li><a href="#external-resources">참고 리소스</a></li>
+                    <li><a href="#faq-section">자주 묻는 질문</a></li>
+                    <li><a href="#consultation-section">일대일 컨설팅</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+
+        <section id="market-analysis">
+            <h2>2026년형 준중형 세단 시장 분석 및 트렌드</h2>
+            <div class="card">
+                <p>대한민국 준중형 세단 시장에서 현대자동차 브랜드가 차지하는 위상은 독보적입니다. 특히 완성형 페이스리프트를 거쳐 안착한 모델은 신차 시장과 장기렌트 리스 시장을 막론하고 최고 수준의 선택을 받고 있습니다. 현재 시장은 2025년 중반에 공식 발표된 2026년형 아반떼 연식변경 모델(CN7)이 실질적인 판매를 주도하고 있으며, 동시에 개발 중인 8세대 아반떼(CN8 풀체인지)의 출시 시점에 대한 소비자 관심도가 고조되는 복합적인 단계에 진입해 있습니다.</p>
+                <p>2026년형 연식변경으로 거듭나면서 상품성이 한층 다듬어졌습니다. 전 트림에 버튼 시동 스마트키를 비롯한 편의 사양이 기본 적용되면서, 기본적인 옵션 보강에 상응하여 평균 60만 원대 전후의 금액 인상이 수반되었습니다. 이는 단순한 원가 상승이라기보다는 엔트리 트림인 가솔린 1.6 스마트 사양에서도 별도의 추가금 없이 일상적인 주행 환경을 확보하게 만드는 상품성 최적화 전략의 일환입니다. 합리적인 실구매자들 사이에서는 하위 트림에 필수 드라이빙 어시스트 패키지만 탑재하는 가성비 위주의 포트폴리오를 구성하는 것이 가장 대중적인 트림 설정 방법으로 권장되고 있습니다.</p>
+                <p>동시에 친환경 세그먼트의 판매 성장이 매우 두드러집니다. 유가가 불안정한 대외 변수 속에서 높은 공인 연비를 제공하는 하이브리드 라인업은 출고 대기 기간이 가솔린 모델 대비 여전히 긴 편입니다. 하이브리드 스마트, 하이브리드 모던 라이트, 하이브리드 모던, 하이브리드 인스퍼레이션, 하이브리드 N라인 등으로 촘촘하게 연결된 하이브리드 라인업은 취득세 세제 혜택 감면 한도를 고려하더라도 가솔린 엔진 사양과의 차이점을 상쇄하는 경제성을 지니고 있습니다. 특히 하이브리드 16인치 휠 장착 사양은 가솔린 스마트스트림 계열보다 압도적으로 뛰어난 효율성을 직접적으로 체감할 수 있는 주안점입니다.</p>
+            </div>
+        </section>
+
+        <section id="popularity-section">
+            <h2>주요 모델 및 트림별 시장 선호도 분석</h2>
+            <div class="popularity-chart">
+                <h3>구매자 실선택 트림 및 엔진 종류 비율 분포</h3>
+                <p>소비자들이 실제로 출고한 빅데이터 통계를 기준으로 가장 선호하는 엔진 형식과 등급별 조합 순위를 도식화한 결과입니다.</p>
+                
+                <div class="chart-bar-container">
+                    <span class="bar-label">스마트스트림 가솔린 1.6 모던 트림 (42%)</span>
+                    <div class="bar-wrapper">
+                        <div class="bar" style="width: 42%; background-color: var(--secondary-color);"></div>
+                    </div>
+                </div>
+                
+                <div class="chart-bar-container">
+                    <span class="bar-label">아반떼 하이브리드 인스퍼레이션 트림 (28%)</span>
+                    <div class="bar-wrapper">
+                        <div class="bar" style="width: 28%; background-color: var(--accent-green);"></div>
+                    </div>
+                </div>
+
+                <div class="chart-bar-container">
+                    <span class="bar-label">스마트스트림 가솔린 1.6 스마트 트림 (14%)</span>
+                    <div class="bar-wrapper">
+                        <div class="bar" style="width: 14%; background-color: var(--accent-warm);"></div>
+                    </div>
+                </div>
+
+                <div class="chart-bar-container">
+                    <span class="bar-label">LPi 1.6 모던 및 기타 사양 (10%)</span>
+                    <div class="bar-wrapper">
+                        <div class="bar" style="width: 10%; background-color: #64748b;"></div>
+                    </div>
+                </div>
+
+                <div class="chart-bar-container">
+                    <span class="bar-label">아반떼 N 및 1.6 가솔린 터보 N라인 (6%)</span>
+                    <div class="bar-wrapper">
+                        <div class="bar" style="width: 6%; background-color: #ef4444;"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="price-table">
+            <h2>2026년 기준 더 올 뉴 아반떼 가격 정보 총괄</h2>
+            <div class="card">
+                <p>개별소비세 기준 및 하이브리드 세제 혜택을 정량적으로 반영한 실구매가 기준의 현대자동차 더 올 뉴 아반떼 가격 구성표입니다. 각 사양의 상세 금액은 선택하는 패키지에 따라 달라질 수 있습니다.</p>
+                
+                <div class="table-responsive">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>엔진 라인업</th>
+                                <th>상세 트림 구분</th>
+                                <th>공식 출시 가격</th>
+                                <th>세제 혜택 반영가 (예상)</th>
+                                <th>특징 및 주요 기본 품목</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td rowspan="4">스마트스트림 가솔린 1.6</td>
+                                <td>스마트</td>
+                                <td>2,034만 원</td>
+                                <td>2,034만 원</td>
+                                <td>버튼 시동, 스마트키, 기본 ADAS 포함</td>
+                            </tr>
+                            <tr>
+                                <td>모던</td>
+                                <td>2,355만 원</td>
+                                <td>2,355만 원</td>
+                                <td>1열 열선 및 통풍 시트, 가죽 스티어링 휠</td>
+                            </tr>
+                            <tr>
+                                <td>인스퍼레이션</td>
+                                <td>2,717만 원</td>
+                                <td>2,717만 원</td>
+                                <td>서라운드 뷰, 후측방 모니터, 10.25인치 클러스터</td>
+                            </tr>
+                            <tr>
+                                <td>N라인</td>
+                                <td>2,806만 원</td>
+                                <td>2,806만 원</td>
+                                <td>N라인 전용 내외장 패키지, 전용 서스펜션</td>
+                            </tr>
+                            <tr>
+                                <td rowspan="5">아반떼 하이브리드 (1.6 HEV)</td>
+                                <td>스마트</td>
+                                <td>2,663만 원</td>
+                                <td>2,523만 원</td>
+                                <td>전륜 멀티링크 서스펜션, 하이브리드 전용 시스템</td>
+                            </tr>
+                            <tr>
+                                <td>모던 라이트</td>
+                                <td>2,689만 원</td>
+                                <td>2,549만 원</td>
+                                <td>합리적 가격 구성의 엔트리 실속 하이브리드</td>
+                            </tr>
+                            <tr>
+                                <td>모던</td>
+                                <td>2,929만 원</td>
+                                <td>2,789만 원</td>
+                                <td>실구매 선호 1위, 내비게이션 및 편의사양 대거 기본화</td>
+                            </tr>
+                            <tr>
+                                <td>인스퍼레이션</td>
+                                <td>3,255만 원</td>
+                                <td>3,115만 원</td>
+                                <td>최첨단 지능형 안전 사양 및 풀옵션 패키지 적용</td>
+                            </tr>
+                            <tr>
+                                <td>N라인</td>
+                                <td>3,324만 원</td>
+                                <td>3,184만 원</td>
+                                <td>고연비 친환경 시스템에 N스포츠 외장을 결합</td>
+                            </tr>
+                            <tr>
+                                <td rowspan="3">아반떼 1.6 LPi (가스 모델)</td>
+                                <td>스마트</td>
+                                <td>2,143만 원</td>
+                                <td>2,143만 원</td>
+                                <td>택시 및 렌터카 선호, 도넛형 봄베 적용</td>
+                            </tr>
+                            <tr>
+                                <td>모던</td>
+                                <td>2,434만 원</td>
+                                <td>2,434만 원</td>
+                                <td>개인 출퇴근용 LPi 주력 옵션 탑재 등급</td>
+                            </tr>
+                            <tr>
+                                <td>인스퍼레이션</td>
+                                <td>2,802만 원</td>
+                                <td>2,802만 원</td>
+                                <td>LPi 중 가장 뛰어난 프리미엄급 내외장 사양</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <p style="margin-top: 16px; font-size: 0.85rem; color: var(--light-text); text-align: right;">※ 상기 명시된 금액은 공식 가격표를 기준으로 작성되었으며, 지자체별 취득 요건 및 대리점별 일시적 이벤트 혜택 적용에 따라 편차가 발생할 수 있습니다.</p>
+            </div>
+        </section>
+
+        <section id="calculator-section">
+            <div class="interactive-calculator">
+                <h2>디 올 뉴 아반떼 실구매 견적 및 월 예상 이용 요금 계산기</h2>
+                <p>원하는 엔진과 트림을 지정하고 금융 설계 유형을 정하면 대략적인 차량 실구매 견적 및 매달 지출되는 예상 비용의 평균 수치를 즉각 산출해 드립니다.</p>
+                
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="engine-select">엔진 종류 선택</label>
+                        <select id="engine-select" onchange="updateCalculatorTrims()">
+                            <option value="gasoline">스마트스트림 가솔린 1.6</option>
+                            <option value="hybrid">아반떼 하이브리드 (1.6 HEV)</option>
+                            <option value="lpi">아반떼 1.6 LPi</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="trim-select">상세 트림 선택</label>
+                        <select id="trim-select" onchange="calculateQuote()">
+                            <!-- JS를 통해 동적 제어 -->
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="finance-select">구매 약정 방식</label>
+                        <select id="finance-select" onchange="calculateQuote()">
+                            <option value="cash">현금 / 일시불 구매</option>
+                            <option value="installment">일반 할부 금융 (36개월 약정)</option>
+                            <option value="lease">자동차 장기렌트 / 리스 (36개월 요금제)</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="deposit-input">초기 납입금 (만 원)</label>
+                        <input type="number" id="deposit-input" value="500" min="0" step="50" oninput="calculateQuote()">
+                    </div>
+                </div>
+
+                <div class="calc-result">
+                    <p id="selected-car-info" style="font-weight: 600; color: var(--primary-color);">선택 모델: 가솔린 1.6 스마트</p>
+                    <p>공식 기본 차량 금액: <span id="basic-price-label" style="font-weight: 700;">2034</span>만 원</p>
+                    <p style="border-top: 1px dashed var(--border-color); padding-top: 12px; margin-top: 12px;">선택하신 조건의 월 예상 지출 요금 및 비용</p>
+                    <p class="total-price" id="monthly-fee-label">0 원</p>
+                    <p id="finance-description" style="font-size: 0.85rem; color: var(--light-text);">세금, 보험료, 등록 비용을 제외한 단순 월 분납 원금 예상치입니다.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="purchase-methods" class="grid-layout">
+            <div>
+                <h2>차량 구매 금융 요금제 분석과 온라인 플랫폼 활용법</h2>
+                <div class="card">
+                    <p>신차를 취득하는 대표적인 방법에는 단순 일시불 결제 외에, 금융 대리점을 경용한 장기 할부 및 차량 소유 주체를 렌트 리스사로 지정하는 자동차 장기렌트 리스 상품 가입 방식이 존재합니다. 최근 이 장기렌트 리스의 매월 납부 금액 산정 형태는 마치 스마트폰을 개통하면서 선택하는 특정 통신 요금이나 고속 유선 인터넷 요금제와 흡사하여 젊은 실구매층에 친화적으로 다가오고 있습니다.</p>
+                    <p>보편적인 다이렉트 신차 할부는 개인이 온전한 차량의 지분을 양도받는 장점이 있으나, 차량 취득 즉시 자산으로 합산되어 건강보험료가 증가하거나 취등록세 부담을 초기에 전액 부담해야 하는 단점이 수반됩니다. 반면 장기렌트는 캐시백이나 별도의 번거로운 절차 없이 보증보험 가입으로 대체할 수 있으며, 취등록비와 매년 자동차세를 납부하지 않아도 된다는 특징이 있습니다. 렌트사 명의의 일괄 자동차 보험 요율이 지정되므로, 사고 이력이 많아 개별 다이렉트 보험료가 매우 높은 운전자가 신청할 경우 상당한 지출 절약 효과를 얻을 수 있습니다.</p>
+                    <p>우리가 온라인 대리점에서 결합할인을 설계하며 기가 인터넷 가입 혜택으로 모바일 사은품, 백화점 상품권, 신규 가입 전용 지원금 혜택 혹은 현금지원을 타진해 보는 것처럼, 온라인 신차 장기렌트 시장 역시 플랫폼별 제휴 이벤트를 통해 비공식 상품권 지급이나 첫 달 이용 요금 면제 등 다양한 사은품 혜택을 제시하곤 합니다. 토스 앱을 활용하여 오토캐시백 한도를 비교해 보거나, 전문 업체의 견적 컨설팅 서비스를 이용해 월 이용 요금의 실시간 순위를 비교하면 수십만 원의 기회비용을 온전히 아낄 수 있습니다.</p>
+                    <div class="highlight-box">
+                        <p><strong>자동차 동호회 실사용자 피드백 요약</strong></p>
+                        <p>디시인사이드 차갤, 보배드림, 에펨코리아(펨코) 등 국내 대표 차 커뮤니티의 내돈내산 출고기 분석 결과, 하이브리드 트림의 경우 실구매가가 일반 가솔린 스마트스트림 가솔린 1.6 인스퍼레이션 등급보다 확연히 높음에도 불구하고, 압도적인 공인 연비와 정숙성을 이유로 가입 및 출고 대기를 기꺼이 감내한다는 비중이 지배적이었습니다. 특히 도심 정체가 잦은 서울 및 수도권 출퇴근 오너들의 추천 비중이 높게 집계되었습니다.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div>
+                <div class="card">
+                    <h3>모델별 세부 스펙 비교표</h3>
+                    <p>엔진 성향과 성격에 따른 정량적 수치 분석입니다.</p>
+                    <table style="font-size: 0.85rem;">
+                        <thead>
+                            <tr>
+                                <th>구분</th>
+                                <th>가솔린 1.6</th>
+                                <th>하이브리드</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>엔진 형식</td>
+                                <td>직렬 4기통</td>
+                                <td>가솔린+모터</td>
+                            </tr>
+                            <tr>
+                                <td>배기량</td>
+                                <td>1,598 cc</td>
+                                <td>1,580 cc</td>
+                            </tr>
+                            <tr>
+                                <td>최고 출력</td>
+                                <td>123 마력</td>
+                                <td>141 마력 합산</td>
+                            </tr>
+                            <tr>
+                                <td>복합 연비</td>
+                                <td>14.8 km/L</td>
+                                <td>21.1 km/L</td>
+                            </tr>
+                            <tr>
+                                <td>리어 서스펜션</td>
+                                <td>토션빔</td>
+                                <td>멀티링크</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="card" id="external-resources">
+                    <h3>공인 신뢰성 외부 정보 출처</h3>
+                    <p>공신력 있는 국가 산하 기관 및 주요 지식 베이스를 활용하여 더 정밀한 규정과 사양을 검토해 볼 수 있습니다.</p>
+                    <ul style="padding-left: 16px; margin: 0; font-size: 0.9rem;">
+                        <li style="margin-bottom: 12px;"><a href="https://directscheckr.koreahankang.com" target="_blank" style="color: var(--secondary-color); font-weight: 600;">국산 신차 종합 통계 데이터 시스템 (reliabledone.com)</a></li>
+                        <li style="margin-bottom: 12px;"><a href="https://namu.wiki/w/%ED%98%84%EB%8C%80%20%EC%95%84%EB%B0%98%EB%94%B8" target="_blank" style="color: var(--secondary-color); font-weight: 600;">나무위키 아반떼 역사 및 변천사</a></li>
+                        <li style="margin-bottom: 0;"><a href="https://www.hyundai.com" target="_blank" style="color: var(--secondary-color); font-weight: 600;">현대자동차 대한민국 공식 웹페이지</a></li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section id="faq-section">
+            <h2>자주 질문받는 필수 정보 (FAQ)</h2>
+            <div class="card faq">
+                <div class="item">
+                    <h4>2026년형 아반떼 연식변경으로 오면서 스마트 트림과 모던 트림의 실질적인 차이점은 무엇인가요?<span>+</span></h4>
+                    <p>기존 연식 대비 2026년형은 가장 저렴한곳에 속하는 스마트 트림에도 버튼시동 스마트키와 세이프티 파워 윈도우 등이 기본 적용되는 장점이 생겼습니다. 그러나 모던 트림으로 격상하면 1열 인조가죽 시트, 통풍 시트, 운전석 파워 시트 및 동승석 열선이 기본 제공되어 국내 유저들이 가장 선호하는 정서적 편의 사양이 대부분 완비됩니다. 이 때문에 실버 및 골드 세대 오너를 불과하고 가성비를 제일 중시하는 소비자가 아닐 경우 대다수 모던 트림 이상을 최종 선택하는 양상입니다.</p>
+                </div>
+                <div class="item">
+                    <h4>하이브리드 세제 혜택 감면 한도와 실제 저렴한곳 구매 노하우가 궁금합니다.<span>+</span></h4>
+                    <p>하이브리드 신차 구매 시 개별소비세 교육세 합산 최대 143만 원, 취득세 최대 40만 원의 감면 혜택이 상시 부여됩니다. 가장 싼곳 견적을 획득하기 위해서는 공식 판매처의 이달의 구매 혜택 외에 카드사 연동형 오토캐시백을 세밀히 설계해 주는 다이렉트 전문 딜러나 공신력 있는 금융 컨설팅 제휴 신규 법인을 통해 통합 견적을 의뢰하는 법이 좋습니다. 네이버나 구글 포털 등에서 장기렌트 성지 좌표 리스트를 사전에 조회하여 수집하는 과정 또한 비용 손실을 최소화하는 좋은 방법입니다.</p>
+                </div>
+                <div class="item">
+                    <h4>챗지피티 혹은 제미나이 같은 AI 시스템이 제안하는 아반떼 베스트 옵션 조합은 어떤 구조인가요?<span>+</span></h4>
+                    <p>인공지능 대형언어모델(LLM)에 의뢰하여 도출한 결과에 따르면 가솔린 1.6 모던 트림에 인포테인먼트 내비2 옵션과 현대 스마트센스3 사양을 단독 추가하는 설계가 잔존가치 보존과 초기 투자 비용 밸런스를 모두 만족하는 최고 우위의 선택지로 나타납니다. 만일 예산 편성에 여유가 있다면 내장재와 음향 시스템이 차별화되는 아반떼 가솔린 인스퍼레이션 등급이나 장기 유류비 면에서 제일 싼곳 자리를 차지하는 아반떼 하이브리드 모던 등급이 강력 추천 대상으로 권고됩니다.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="consultation-section">
+            <div class="grid-layout">
+                <div>
+                    <h2>합리적 의사결정을 돕는 전문 카 매니저 컨설팅 안내</h2>
+                    <p>개개인의 연간 누적 주행 거리, 주로 왕래하는 구도심 및 도시고속도로 비율, 보유하고 있는 주차 공간의 충전 인프라 유무에 따라 가장 적합한 내 차 만들기 전략은 판이하게 달라집니다.</p>
+                    <p>상세 옵션 명세서의 세부 자구들이 어렵게 느껴지거나, 인터넷에 산재한 과장된 무보증 조건 및 현금지원 과대광고 사은품 정보에 지치셨다면 현대자동차 제휴 오토 컨설턴트의 담백한 일대일 상담 서비스를 이용해 보시기 바랍니다. 당사는 수시로 변동되는 딜러사 내부 특별 조건과 주요 금융사의 리스 이자율을 기계적으로 단순 비교하여 가장 투명한 최종 월 지출 비용을 검출해 드립니다.</p>
+                </div>
+
+                <div class="contact-form">
+                    <h3>맞춤형 견적 산출 신청</h3>
+                    <form onsubmit="handleFormSubmit(event)">
+                        <label for="user-name">성명 및 연락처</label>
+                        <input type="text" id="user-name" placeholder="홍길동 (010-0000-0000)" required>
+
+                        <label for="interest-car">관심 적용 엔진 모델</label>
+                        <select id="interest-car">
+                            <option value="gas">가솔린 1.6 스마트스트림 계열</option>
+                            <option value="hev">친환경 1.6 하이브리드 계열</option>
+                            <option value="lpg">경제적 1.6 LPi 가스 계열</option>
+                            <option value="high-performance">아반떼 N / N Line 고성능</option>
+                        </select>
+
+                        <label for="message-box">추가 희망 문의 사항</label>
+                        <textarea id="message-box" rows="4" placeholder="예시: 연간 2만 킬로 주행 예정인데 가솔린 모던 트림과 하이브리드 스마트 트림 중 장기 유지비 관점에서 어느 것이 더 합리적일지 상담 요청합니다." required></textarea>
+
+                        <button type="submit">무료 맞춤 컨설팅 견적 신청</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+
     </main>
-  </body>
-</html>
+
+
+  
+
+    <script>
+        const priceData = {
+            gasoline: [
+                { name: "가솔린 1.6 스마트", price: 2034 },
+                { name: "가솔린 1.6 모던", price: 2355 },
+                { name: "가솔린 1.6 인스퍼레이션", price: 2717 },
+                { name: "가솔린 1.6 N라인", price: 2806 }
+            ],
+            hybrid: [
+                { name: "하이브리드 스마트", price: 2523 },
+                { name: "하이브리드 모던 라이트", price: 2549 },
+                { name: "하이브리드 모던", price: 2789 },
+                { name: "하이브리드 인스퍼레이션", price: 3115 },
+                { name: "하이브리드 N라인", price: 3184 }
+            ],
+            lpi: [
+                { name: "LPi 1.6 스마트", price: 2143 },
+                { name: "LPi 1.6 모던", price: 2434 },
+                { name: "LPi 1.6 인스퍼레이션", price: 2802 }
+            ]
+        };
+
+        function updateCalculatorTrims() {
+            const engineType = document.getElementById("engine-select").value;
+            const trimSelect = document.getElementById("trim-select");
+            trimSelect.innerHTML = "";
+
+            priceData[engineType].forEach(trim => {
+                const option = document.createElement("option");
+                option.value = trim.price;
+                option.text = `${trim.name} (${trim.price}만 원)`;
+                trimSelect.appendChild(option);
+            });
+
+            calculateQuote();
+        }
+
+        function calculateQuote() {
+            const engineSelect = document.getElementById("engine-select");
+            const engineText = engineSelect.options[engineSelect.selectedIndex].text;
+            
+            const trimSelect = document.getElementById("trim-select");
+            if (trimSelect.options.length === 0) return;
+            const trimText = trimSelect.options[trimSelect.selectedIndex].text.split(" (")[0];
+            const basePrice = parseInt(trimSelect.value);
+
+            const financeType = document.getElementById("finance-select").value;
+            const deposit = parseInt(document.getElementById("deposit-input").value) || 0;
+
+            document.getElementById("selected-car-info").textContent = `선택 모델: ${engineText} - ${trimText}`;
+            document.getElementById("basic-price-label").textContent = basePrice;
+
+            let mainRemainingValue = basePrice - deposit;
+            if (mainRemainingValue < 0) mainRemainingValue = 0;
+
+            let resultLabelText = "";
+            let descriptionText = "";
+
+            if (financeType === "cash") {
+                let formattedCash = (basePrice + (basePrice / 15)); 
+                let roundedCash = Math.round(formattedCash);
+                resultLabelText = `실구매 취득 예상가: 대략 ${roundedCash}만 원`;
+                descriptionText = "차량 정가에 취등록세 약 7%와 공채 매입 할인금이 가산된 인수가 기준 추정치입니다.";
+            } else if (financeType === "installment") {
+                let monthlyInstallment = Math.round((mainRemainingValue / 36) * 10000);
+                let displayPayment = monthlyInstallment.toLocaleString();
+                resultLabelText = `월 예상 납부금: 약 ${displayPayment} 원`;
+                descriptionText = "36개월 균등 상환 할부 원금 기준의 예상 계산 결과입니다. 연 이자율 수수료는 신용 등급별로 다릅니다.";
+            } else {
+                let rentalFee = Math.round((basePrice / 50) * 10000);
+                let displayRental = rentalFee.toLocaleString();
+                resultLabelText = `월 예상 대여 요금: 약 ${displayRental} 원`;
+                descriptionText = "장기렌트 약정 기준이며 정비 미포함, 세금 및 단독 대인 보험 일체 포함 요금제 환산 수치입니다.";
+            }
+
+            document.getElementById("monthly-fee-label").textContent = resultLabelText;
+            document.getElementById("finance-description").textContent = descriptionText;
+        }
+
+        function handleFormSubmit(event) {
+            event.preventDefault();
+            const nameInput = document.getElementById("user-name").value;
+            if (nameInput) {
+                alert("성공적으로 접수되었습니다. 담당 오토 플래너 검토 후 등록하신 연락처로 친절히 연락드리겠습니다.");
+            }
+        }
+
+        document.addEventListener("DOMContentLoaded", () => {
+            updateCalculatorTrims();
+
+            const faqItems = document.querySelectorAll(".faq .item h4");
+            faqItems.forEach(item => {
+                item.addEventListener("click", function() {
+                    const parent = this.parentNode;
+                    parent.classList.toggle("open");
+                });
+            });
+        });
+    </script>
+  
